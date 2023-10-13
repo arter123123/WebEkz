@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{default}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>
+        Изменение информации о складах
+    </title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div th:text="${errors}" class="margin-bottom alert-danger"></div>
+    <form action="#" th:action="@{/product/edit/{id}(id=${id})}" th:object="${productDto}" method="post">
+        <div class="col-mb-3">
+            <label for="productName" class="form-label">Имя</label>
+            <input type="text" class="form-control" id="productName" required th:field="${productDto.productName}">
+        </div>
+        <div class="mb-3">
+            <label for="order" class="form-label">Добавить в заказ</label>
+            <select id="order" class="form-control" th:name="orderId">
+                <option th:each="order : ${orders}" th:value="${order.id}" th:text="${order.id}"></option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary button-fixed">
+                <span th:if="${id == null}">Добавить</span>
+                <span th:if="${id != null}">Обновить</span>
+            </button>
+            <a class="btn btn-secondary button-fixed" th:href="@{/product}">
+                Назад
+            </a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

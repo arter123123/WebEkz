@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{default}" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>
+    Изменение информации о складах
+  </title>
+</head>
+<body>
+<div layout:fragment="content">
+  <div th:text="${errors}" class="margin-bottom alert-danger"></div>
+  <form action="#" th:action="@{/order/edit/{id}(id=${id})}" th:object="${orderDto}" method="post">
+    <div class="col-mb-3">
+      <label for="price" class="form-label">Цена</label>
+      <input type="number" class="form-control" id="price" step="1" min="0" required th:field="${orderDto.price}">
+    </div>
+    <div class="mb-3">
+      <button type="submit" class="btn btn-primary button-fixed">
+        <span th:if="${id == null}">Добавить</span>
+        <span th:if="${id != null}">Обновить</span>
+      </button>
+      <a class="btn btn-secondary button-fixed" th:href="@{/order}">
+        Назад
+      </a>
+    </div>
+  </form>
+</div>
+</body>
+</html>
